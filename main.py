@@ -14,7 +14,8 @@ if __name__ == "__main__":
 
     #split words apart to be filtered
     #cleanup = DSM4.map(lambda w: w.split("This page intentionally left blank"))
-    counts = DSM4.map(lambda w: w.split(' ')).map(lambda x: (x, 1)).reduceByKey(add)
+
+    counts = DSM4.flatMap(lambda x: x.split(' ')).map(lambda x: (x, 1)).reduceByKey(add)
     output = counts.collect()
     
     for (word, count) in output:

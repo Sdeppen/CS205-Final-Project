@@ -10,15 +10,20 @@ if __name__ == "__main__":
 
     sc = SparkContext()
     # Load and parse data into sections
-    DSM4 = sc.textFile("testfile.txt")
+    DSM4 = sc.textFile("dsm-iv-2edits.txt")
 
     #split words apart to be filtered
-    #cleanup = DSM4.map(lambda w: w.split("This page intentionally left blank"))
+    cleanup = DSM4.flatMap(lambda w: w.split("This page intentionally left blank")) #.map(lambda x: (x, 1)).reduceByKey(add)
+    output = cleanup.collect()
 
-    counts = DSM4.flatMap(lambda x: x.split(' ')).map(lambda x: (x, 1)).reduceByKey(add)
-    output = counts.collect()
+    for (word) in output:
+        print("%s: END OF SECTION" % (word)) 
+ 
+    #counts = DSM4.flatMap(lambda x: x.split(' ')).map(lambda x: (x, 1)).reduceByKey(add)
+    #output = counts.collect()
     
-    for (word, count) in output:
-        print("%s: %i" % (word, count)) 
-   
+   # for (word, count) in output:
+   #     print("%s: %i" % (word, count))
+
+  
     sc.stop()

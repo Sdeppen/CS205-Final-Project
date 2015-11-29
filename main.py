@@ -25,11 +25,5 @@ if __name__ == "__main__":
 
     for (word) in output:
         print("%s \n \n" % (word))
-   
-   #counts = DSM4.flatMap(lambda x: x.split(' ')).map(lambda x: (x, 1)).reduceByKey(add)
-    #output = counts.collect()
-    
-   # for (word, count) in output:
-   #     print("%s, %i: END OF LINE" % (word, count)) 
-  
+
     sc.stop()

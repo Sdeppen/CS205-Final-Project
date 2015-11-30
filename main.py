@@ -6,24 +6,24 @@ from pyspark.mllib.clustering import LDA, LDAModel
 from operator import add
 import sys
 
+
 if __name__ == "__main__":
 
     sc = SparkContext()
     # Load and parse data into sections
 
-    DSM4 = sc.textFile("dsm-iv-2edits.txt")
-
-    delimiter = "This page intentionally left blank\n"
+    delimiter = ' '
+    #delimiter = "This page intentionally left blank\n\n"
     contents = open("testfile.txt").read()
     DSM4 = sc.parallelize(contents.split(delimiter))
     # open / read the file
 
-   # delimiters = "This page intentionally left blank"
-    #split words apart to be filtered
-    cleanup = DSM4.flatMap(lambda w: w.split("\n"))#"This page intentionally left blank"))
-    output = cleanup.collect()
+    # split words apart to be filtered
+    split = DSM4.flatMap(lambda x: x.split("#"))
+    output = split.collect()
+    print(split.take(5))
 
-    for (word) in output:
-        print("%s \n \n" % (word))
-
+    #for (word) in output:
+    #    print("%s \n \n" % (word))
+                                                          
     sc.stop()

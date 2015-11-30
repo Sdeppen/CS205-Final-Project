@@ -11,19 +11,17 @@ if __name__ == "__main__":
 
     sc = SparkContext()
     # Load and parse data into sections
-
-    delimiter = ' '
-    #delimiter = "This page intentionally left blank\n\n"
+    delimiter = "This page intentionally left blank #\n\n"
     contents = open("testfile.txt").read()
     DSM4 = sc.parallelize(contents.split(delimiter))
     # open / read the file
 
     # split words apart to be filtered
-    split = DSM4.flatMap(lambda x: x.split("#"))
+    split = DSM4.flatMap(lambda x: x.split(delimiter))
     output = split.collect()
-    print(split.take(5))
+    # print(split.take(5))
 
-    #for (word) in output:
-    #    print("%s \n \n" % (word))
+    for (section) in output:
+        print("%s" % (section))
                                                           
     sc.stop()

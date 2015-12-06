@@ -2,9 +2,10 @@ from __future__ import print_function
 import findspark 
 findspark.init()
 from pyspark import SparkContext
-#from pyspark.mllib.feature import Word2Vec
 from operator import add
 from numpy import array
+from pyspark.mllib.clustering import LDA, LDAModel
+from pyspark.mllib.linalg import Vectors
 import sys
 
 

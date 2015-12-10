@@ -18,10 +18,14 @@ with open('dsm-iv-lc-nosym.txt','r') as f:
                 file.write("%s " %(counter))
 file.close()
 
+for i in range(len(wordcnt)):
+    if (wordcnt[i] > 100):
+        print wordcnt[i], word_list[i]
+        
 #write wordcounts to new file
-filewc = open("wordcount.txt", "w")
-idx = 0
-for num in wordcnt:
-    filewc.write("%s " %(num))
-    idx += 1
-filewc.close()
+#filewc = open("wordcount.txt", "w")
+#idx = 0
+#for num in wordcnt:
+#    filewc.write("%s " %(num))
+#    idx += 1
+#filewc.close()

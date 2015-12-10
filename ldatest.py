@@ -23,5 +23,5 @@ for topic in range(3):
         print(" " + str(topics[word][topic]))
                                 
 # Save and load model
-ldaModel.save(sc, "myModelPath")
-sameModel = LDAModel.load(sc, "myModelPath")
+#ldaModel.save(sc, "myModelPath")
+#sameModel = LDAModel.load(sc, "myModelPath")

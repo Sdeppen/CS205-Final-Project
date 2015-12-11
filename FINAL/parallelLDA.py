@@ -52,6 +52,11 @@ Topic 17: delusions weight person body obsessions may nervosa compulsions
 Topic 18: depressive disorder episode major episodes bipolar manic mood
 Topic 19: individuals disorder prevalence common women reported studies among
 
+RESULTS (for D.txt)
+
+
+See parallelLDAFull.png for plot
+
 """
 # -*- coding: utf-8 -*-
 """
@@ -89,9 +94,10 @@ def clean(list):
     en_stop = get_stop_words('en')
     toret = []
     for word in list.split():
-        token = word.lower() #.decode("ascii", "ignore")
+        token = word.lower().decode("ascii", "ignore")
         # remove stop words from tokens
         if not token in en_stop and len(token)>2 and token.isalpha() and not token.isdigit() and not token.isspace() and not (token == '') and not (token == '\n'):
+            print(token)
             toret.append(token)
 
     return toret
@@ -105,7 +111,7 @@ if __name__ == "__main__":
     delimiter = "\n"
     
     # Open / read file and load and parse data into sections
-    contents = open("ShortDiagTest.txt").read()
+    contents = open("fullTest.txt").read()
     DSM4 = sc.parallelize(contents.split(delimiter), 100)
     doc = DSM4.map(lambda w: ' '.join(clean(w))).map(lambda h: h if len(h) > 2 else None).collect()
     sc.stop()

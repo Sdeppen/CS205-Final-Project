@@ -52,10 +52,30 @@ Topic 17: delusions weight person body obsessions may nervosa compulsions
 Topic 18: depressive disorder episode major episodes bipolar manic mood
 Topic 19: individuals disorder prevalence common women reported studies among
 
-RESULTS (for D.txt)
-
+RESULTS (for fullTest.txt)
 
 See parallelLDAFull.png for plot
+
+Topic 0: disorder disorders individuals may criteria symptoms sexual psychotic
+Topic 1: may sleep condition diagnosis anxiety also occur can
+Topic 2: effects another early made specify drug impaired absence
+Topic 3: personality episode age common must presence children chronic
+Topic 4: separation mild familial classes fully intoxication act classification
+Topic 5: sufficiently cyclothymic cultures established intentionally superimposed indicates definition
+Topic 6: inappropriate found expression transient refer biological reality distinguish
+Topic 7: month generally continued although catatonic rapid caffeine consequence
+Topic 8: certain seen recovery etiology rate thought subtype subjective
+Topic 9: last phase apnea stimuli accounted code melancholic therefore
+Topic 10: need function interpersonal fact determine close manic adulthood
+Topic 11: attention another limited paranoid unknown performance objects begins
+Topic 12: dependence primary activities likely marked neurological disturbances partial
+Topic 13: caused nightmares help complete repetitive recognize thinking phobias
+Topic 14: toward appears underlying evident falling effects dysfunctions transvestic
+Topic 15: specified judged clinically cognitive whereas conversion described relationship
+Topic 16: avoidance skills reported particular persons manifested sense serious
+Topic 17: major mental one time prevalence feature stress hypersomnia
+Topic 18: medical general due features dementia physical delirium dysfunction
+Topic 19: disorder substance symptoms associated criterion see specific mood
 
 """
 # -*- coding: utf-8 -*-

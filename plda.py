@@ -13,7 +13,6 @@ import numpy as np
 import lda._lda
 import lda.utils
 
-sc = SparkContext()
 logger = logging.getLogger('lda')
 
 PY2 = sys.version_info[0] == 2
@@ -170,15 +169,19 @@ class LDA:
         in Wallach et al. (2009) and discussed in Buntine (2009).
 
         """
-        if isinstance(X, np.ndarray):
+        if isinstance(X, np.ndarray):    
             # in case user passes a (non-sparse) array of shape (n_features,)
             # turn it into an array of shape (1, n_features)
             X = np.atleast_2d(X)
         doc_topic = np.empty((X.shape[0], self.n_topics))
         WS, DS = lda.utils.matrix_to_lists(X)
+        # 
+        sc = SparkContext()
+        doc_para = sc.parallelize(np.unique(DS), 100)
+        doc_topic = doc_para.map(lambda f: f._transform_single(WS[DS == d], max_iter, tol)).collect()
         # TODO: this loop is parallelizable
-        for d in np.unique(DS):
-            doc_topic[d] = self._transform_single(WS[DS == d], max_iter, tol)
+        #for d in np.unique(DS):
+        #    doc_topic[d] = self._transform_single(WS[DS == d], max_iter, tol)
         return doc_topic
 
     def _transform_single(self, doc, max_iter, tol):
@@ -186,7 +189,7 @@ class LDA:
 
         Parameters
         ----------
-        X : 1D numpy array of integers
+        X : 1D nparalumpy array of integers
             Each element represents a word in the document
         max_iter : int
             Maximum number of iterations in iterated-pseudocount estimation.
@@ -233,7 +236,7 @@ class LDA:
                 logger.info("<{}> log likelihood: {:.0f}".format(it, ll))
                 # keep track of loglikelihoods for monitoring convergence
                 self.loglikelihoods_.append(ll)
-            sc.parallelize(self._sample_topics(rands), 100)
+            self._sample_topics(rands)
         ll = self.loglikelihood()
         logger.info("<{}> log likelihood: {:.0f}".format(self.n_iter - 1, ll))
         # note: numpy /= is integer division

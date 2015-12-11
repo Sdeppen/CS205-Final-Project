@@ -5,10 +5,6 @@ Results (for short.txt):
 
 See serialLDAplot.png for plot
 
-('Checkpoint 1: CSV File Created. Seconds:', 0.014208793640136719)
-('Checkpoint 2: Matrix Data Created. Seconds:', 0.03895282745361328)
-((167,), (11, 167))
-('Checkpoint 3: Model Fitted. Seconds:', 30.44348978996277)
 Topic 0: presence elementary multiple paragraph relatively intelligence substantially ability
 Topic 1: samples developed fall performance difficulties attention ability terms
 Topic 2: excessively measured standardized decoding ability terms evaluation reading
@@ -29,9 +25,8 @@ Topic 16: criterion sensory achievement characterized require tests expected int
 Topic 17: condition assessment tasks dictation asked case schoolwork oral
 Topic 18: less diagnosis observing area oral written terms evaluation
 Topic 19: significantly oral grades sentences necessary within young individually
-('Checkpoint 4: About to Create Plot. Seconds:', 30.445133924484253)
 
-""""
+"""
 # -*- coding: utf-8 -*-
 """
 Created on Wed Dec  9 19:50:08 2015
@@ -43,6 +38,8 @@ https://rstudio-pubs-static.s3.amazonaws.com/79360_850b2a69980c4488b1db95987a248
 https://pypi.python.org/pypi/lda
 http://www.christianpeccei.com/textmining/
 http://chrisstrelioff.ws/sandbox/2014/11/13/getting_started_with_latent_dirichlet_allocation_in_python.html
+
+TODO: Fix time measurement issues 
 """
 
 import textmining
@@ -78,8 +75,8 @@ with open('short.txt','r') as f:
         tdm.add_doc(doc)
 
 tdm.write_csv('matrix1.csv', cutoff=1)
-chk = time.time()
-cp1 = chk - start_time
+
+cp1 = time.time()- start_time
 print ("Checkpoint 1: CSV File Created. Seconds:", cp1 )
 """
 # Instead of writing out the matrix you can also access its rows directly.
@@ -93,8 +90,7 @@ all_data = np.genfromtxt("matrix1.csv", delimiter=",", dtype = None)
 words = all_data[0,:]
 matrix = all_data[1:,:]
 
-chk = time.time()
-cp2 = chk - cp1
+cp2 = time.time() - cp1
 print ("Checkpoint 2: Matrix Data Created. Seconds:", cp2 )
 print (words.shape, matrix.shape)
 
@@ -111,8 +107,7 @@ vocab = words
 model = lda.LDA(n_topics=20, n_iter=1500, random_state=1) #1500
 model.fit(X)
 
-chk = time.time()
-cp3 = chk - cp2
+cp3 = time.time() - cp2
 print ("Checkpoint 3: Model Fitted. Seconds:", cp3 )
 
 topic_word = model.topic_word_
@@ -126,8 +121,7 @@ for i in range(10):
      print('Topic {}: {}'.format(titles[i], doc_topic[i].argmax()))
 """
 
-chk = time.time()
-cp4 = chk - cp3
+cp4 = time.time() - cp3
 print ("Checkpoint 4: About to Create Plot. Seconds:", cp4)
 f, ax= plt.subplots(5, 1, figsize=(8, 6), sharex=True)
 for i, k in enumerate([0, 5, 9, 14, 19]):

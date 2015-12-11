@@ -63,7 +63,7 @@ cp1 = chk - start_time
 print ("Checkpoint 1: CSV File Created. Seconds:", cp1 )
 
 # reading in all data into a NumPy array
-all_data = np.genfromtxt("matrix1.csv", delimiter=",", dtype = None)
+all_data = np.genfromtxt("matrix2.csv", delimiter=",", dtype = None)
                       
 words = all_data[0,:]
 matrix = all_data[1:,:]
